@@ -3,75 +3,86 @@
 
 --> a big directed acyclic graph
 
-![Git Workflow](images/git_workflow.png)
+##### HEAD is the symbolic name for the currently checked out commit
+* detached HEAD means that the HEAD is poiting to a commit instead of a branch
+
+
+## Basic commands
+
+### Local
+
+| Command | Description |
+|---------|-------------|
+| **git init example** | Initialise a repository with the name "example"|
+| **git status**| See the files in the staging area compared to the branch |
+| **git add myfile** | Add a file to the staging area|
+| **git rm myfile** | Remove a file from the working index and staging area|
+| **git commit -m "my message"** | Save all the stages file as a new commit in the current branch with the message "my message"|
+| **git diff** | Shows what changes have been made that are not yet committed(compares the working area, **not the staging area** with the branch) |
+| **git diff --staged** | Shows the changes that have been staged, but not yet committed|
+
+
+### Remote
+
+| Command | Description |
+|---------|-------------|
+| **git pull remote** | **Fetch** the new changes from the remote and **merge** them to the current branch|
+| **git clone url_to_repo** | Copy a repo to the current directory and save it with the same name as the repo|
+
+
+## Intermediate commands
 
 
 
+### Local
 
-### Basic commands
+| Command | Description |
+|---------|-------------|
+| **git mv** | Rename a file and detect it automatically in the staging area |
+| **git diff --staged**| Show any changes that have been made in the staging area compared with the branch|
+| **git reset HEAD~1** | Move the current branch 1 commit back |
+| **git branch -f master HEAD~2**| Move the "master" branch to point 2 commits back from where HEAD points to |
+| **git bisect start** | Find the first bad commit using binary search |
+| **git cherry-pick <Commit_1> <Commit_2>** | Copy the commits(as hashes) on top of HEAD |
+| **git checkout sha256_hash**| Move the HEAD to the commit specified (**WARNING**: This results in a detached HEAD if a branch does not point to that commit) |
+| **git rebase -i HEAD~4** | From where currently are, go back 4 commits and do rebasing in an interactive way |
 
-> git init
+* interactive rebasing offers :
+    * reordering of the commits
+    * deleting some commits
+    * squashing some commits
 
-* initialise a repository
+### Remote
 
-> git init example
+| Command | Description |
+|---------|-------------|
+| **git pull -r** | Same as **git pull**, but do rebasing|
+|**git revert HEAD~1**| Move the remote branch 1 commit back |
 
-* initialise a repository with the name "example"
+  
 
-> git status
+###### **--hard** vs **--soft** vs **--mixed**
 
-* check the status of the repository
-
-> git add test.md
-
-* add the file to the staging area
-
-> git rm test.md
-
-* remote the file from the staging area
-
-> git commit -m "My commit"
-
-*
-
-> git clone myrepo
-
-* copy a repo to the current directory
-
-> git pull -r
-
-* get the new version from the repo and do rebase
-
-> git mv
-
-* rename a file and detect it automatically in the staging area
-
-> git diff
-
-* it compares the WORKING area with the STAGING area
-
-> git diff --staged
-
-* it compares the STAGING area with the REPO(the branch that you are currently on)
-
-> git rm
-
-* remove the file from the working area and add the deletion of it to the stagin area
-
-> git rebase -i HEAD~4
-
-* from where currently are, go back 4 commits(good for rewriting the history)
-
-> git reflog
-
-* like a version control for the version control
-* can undo the rebase:
-
-> git reset --hard HEAD@{n}
-
-* take the current branch and put it back where it was 5 steps in it's history(in the reflog)
+![](images/movement.jpg)
 
 
+#### When s*it is real
+
+| Command | Description |
+|---------|-------------|
+| **git diff HEAD~2 HEAD**| See the changes between the commit at the current pointer and 2 commits behind the pointer |
+| **git log --oneline** | See the message from each commit |
+| **git log -p -n 2**| See the message from the last 2 commits(HEAD and HEAD~1) commit and the differences|
+| **git bisect start**| Find the first bad commit|
+| **git blame <file>**| Show the last author who made changes on each line of a file|
+
+
+* Caret
+  * **master^**
+    * the first parent of master(moves up by one)
+* '~' operator
+  * **HEAD~2**
+    * 2 commits up from the HEAD
 
 ### Internals
 --> a git repository is just the folder ".git"
@@ -81,16 +92,8 @@
 --> even tough you might have 2 versions of a file where only a line of code was changed, a compression algorithm is used to create .pac files
 
 
+![Git Workflow](images/git_workflow.png)
 
-
-
-Working ---> Staging(git add)
-
-Working <--- Staging(git reset)
-
-Staging ---> Repo(git commit)
-
-Working <--- Repo(git checkout)
 
 
 --> objects stored by git:
@@ -123,6 +126,11 @@ Working <--- Repo(git checkout)
 --> a branch is a pointer to any commits in the repo
 
 
+## Where to practice?
+* [Learn Git branching](https://learngitbranching.js.org/)
+* [Git exercises](https://gitexercises.fracz.com/)
+* [Katakoda](https://www.katacoda.com/courses/git)
+* [More exercises](https://training-course-material.com/training/Git_exercises)
 
-
-- [ ] after a file is deleted, how do you get it back from the repo?
+## Further reading
+* [Using Git](https://code-maven.com/slides/git/)
