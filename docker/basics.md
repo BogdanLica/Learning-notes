@@ -2,6 +2,7 @@
 
 ### What problem does it solve?
 * it gives identical environments for testing the code and then for production
+* i.e : package an application with all its dependencies into a standardized unit
 
 ## *Internals of Docker*
 --> docker uses the Linux namespaces to provide the separation between the programs
@@ -143,3 +144,23 @@ eg
 ###### A service only runs one image,but it knows the ports that are goint to be used, how many replicas of the container should be used for the service to be functional.
 ###### Scaling a service means just changing the number of container instances running by assigning more computing resources
 ###### This can be done using a **docker-compose.yml** file
+
+
+
+---
+## Getting Started with Docker
+### A docker container has it's own **process space and network interface**
+* it has it's own */sbin/init*
+* Docker is carrying out client-server work on the UNIX socket( /var/run/docker.sock )
+* it has the port 2375 registered, but it is closed by default
+#### Containerization technologies
+* **LXC (Linux Containers)**
+* **OpenVZ**
+* **FreeBSD jail**
+* **Solaris Containers**
+
+##### The Docker registry is a repository
+
+###### Download an image from the Docker registry
+> docker pull name_image
+
