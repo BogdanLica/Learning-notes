@@ -14,3 +14,7 @@
 ##### Lightness is the amount of white or black
 
 ---
+
+
+#### Media Queries
+* change the content based on different *viewport* sizes (the user's visible area of a web page)
